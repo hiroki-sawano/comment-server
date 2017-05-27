@@ -5,10 +5,14 @@ import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 
 /**
- * User management class
+ * This class manages User objects.<br>
+ * Each of them contains the id of a movie he is watching and the movie's comment list. 
  *
- * @author hiroki-sawano
- *
+ * @author Hiroki Sawano
+ * @see User
+ * @see Logger
+ * @see Config
+ * @since 1.0
  */
 public class UserManagement {
     
@@ -19,8 +23,7 @@ public class UserManagement {
     private static Logger logger = LogManager.getLogger();
 
     /**
-     * Constructor<br>
-     * create a user management area that can accommodate maxNumUser users
+     * This Constructor creates a user management area that can accommodate maxNumUser users.
      */
     public UserManagement() {
         Config config = Config.getInstance();
@@ -32,19 +35,22 @@ public class UserManagement {
         }
     }
 
+    /**
+     * 
+     * @return maxNumUser
+     */
     public static int getMaxNumUser() {
         return maxNumUser;
     }
 
     /**
-     * add a user<br>
-     * return its user id after setting a thread object, movie id and comment
-     * list
+     * This method is used to add a new user.<br>
+     * It returns its user id after setting a thread object, movie id and comment list.
      *
      * @param thread
      * @param movieId
      * @param commentList
-     * @return i
+     * @return user id
      */
     synchronized public static int addUser(CommentServerThread thread, String movieId, Document commentList) {
         int i;

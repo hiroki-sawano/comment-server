@@ -53,22 +53,39 @@ public class CommentServerThread extends Thread {
         this.start();
     }
 
+    /**
+     * 
+     * @return out 
+     */
     public PrintWriter getOut() {
         return out;
     }
 
+    /**
+     * 
+     * @return userId 
+     */
     public int getUserId() {
         return userId;
     }
 
+    /**
+     * 
+     * @return ipAddress 
+     */
     public String getIpAddress() {
         return ipAddress;
     }
 
     /**
-     * communicate with clients, receiving a movie id and comment, sending the
+     * Communicates with clients, receiving a movie id and comment, sending the
      * comment to those whose movie ids are the same.
      * 
+     * @see BufferedReader
+     * @see PrintWriter
+     * @see Environment
+     * @see UserManagement
+     * @see Socket
      */
     @Override
     public void run() {
