@@ -8,6 +8,16 @@ import java.util.Properties;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 
+/**
+ * This singleton class reads <i>config.properties</i> and 
+ * contains the user-defined constant variables.
+ * 
+ * @author Hiroki Sawano
+ * @see Logger
+ * @see Properties
+ * @see InputStream
+ * @since 1.0
+ */
 public class Config {
 
     private static Config instance = null;
@@ -18,6 +28,11 @@ public class Config {
     
     private static Logger logger = LogManager.getLogger();
 
+    /**
+     * Generates only one instance.
+     * 
+     * @return Config object
+     */
     public static synchronized Config getInstance() {
         if (instance == null) {
             instance = new Config();
@@ -25,6 +40,9 @@ public class Config {
         return instance;
     }
 
+    /**
+     * Initializes instance fields according to <i>config.properties</i>.
+     */
     public void init(){
         Properties properties = new Properties();
         String file = "src/main/resources/config.properties";
@@ -46,27 +64,24 @@ public class Config {
         }
     }
 
+    /**
+     * @return a port number this comment server uses.
+     */
     public int getPort() {
         return port;
     }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
-
+    /**
+     * @return the maximum number of users the server can accept at the same time.
+     */
     public int getMaxNumUser() {
         return maxNumUser;
     }
 
-    public void setMaxNumUser(int maxNumUser) {
-        this.maxNumUser = maxNumUser;
-    }
-
+    /**
+     * @return a place where comment lists are saved.
+     */
     public String getCommentListDir() {
         return commentListDir;
-    }
-
-    public void setCommentListDir(String commentListDir) {
-        this.commentListDir = commentListDir;
     }
 }

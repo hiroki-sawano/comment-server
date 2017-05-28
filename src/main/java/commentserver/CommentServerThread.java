@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
+import javax.xml.transform.TransformerException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -187,7 +188,7 @@ public class CommentServerThread extends Thread {
                 out.close();
                 in.close();
                 socket.close();
-            } catch (Exception ex) {
+            } catch (TransformerException | IOException ex) {
                 logger.error("exception");
             }
         }
