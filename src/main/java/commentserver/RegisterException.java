@@ -1,3 +1,4 @@
+package commentserver;
 
 /**
  * User register exception

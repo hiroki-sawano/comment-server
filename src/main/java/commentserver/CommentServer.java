@@ -1,4 +1,5 @@
-import commentserver.Config;
+package commentserver;
+
 import java.net.*;
 import java.io.*;
 import org.apache.logging.log4j.LogManager;

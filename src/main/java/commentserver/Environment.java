@@ -1,3 +1,4 @@
+package commentserver;
 
 /**
  * a shared object among threads
