@@ -45,10 +45,12 @@ public class Config {
      */
     public void init(){
         Properties properties = new Properties();
-        String file = "src/main/resources/config.properties";
+        //String file = "src/main/resources/config.properties";
         InputStream inputStream;
         try {
-            inputStream = new FileInputStream(file);
+            //inputStream = new FileInputStream(file));
+            inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
+            
             properties.load(inputStream);
             inputStream.close();
 
