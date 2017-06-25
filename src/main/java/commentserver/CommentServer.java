@@ -33,9 +33,6 @@ public class CommentServer {
         try {
             Config config = Config.getInstance();
             config.init();
-            
-            // create a shared object for user management
-            Environment.um = new UserManagement();
 
             commentServerSocket = new ServerSocket(config.getPort());
             

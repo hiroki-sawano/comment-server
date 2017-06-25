@@ -124,7 +124,7 @@ public class CommentServerThread extends Thread {
                     commentList = new CommentList(movieId);
 
                     // add a new user
-                    userId = Environment.um.addUser(this, movieId, commentList.getCommentList());
+                    userId = UserManagement.addUser(this, movieId, commentList.getCommentList());
 
                     // can't accept a user anymore
                     if (userId == UserManagement.getMaxNumUser()) {
@@ -161,7 +161,7 @@ public class CommentServerThread extends Thread {
                         logger.info("{} (user ID:{}, movie ID:{}) sent the following comment : {}", ipAddress, userId, movieId, receivedMessage);
 
                         // distribute the received comment to users who are watching the same movie
-                        Environment.um.sendComment(movieId, CommentList.createSendData(receivedMessage));
+                        UserManagement.sendComment(movieId, CommentList.createSendData(receivedMessage));
                         commentList.addComment(receivedMessage);
                     }
                 }
@@ -184,7 +184,7 @@ public class CommentServerThread extends Thread {
                     }
                 }
                 if (userId != -1) {
-                    Environment.um.removeUser(userId);
+                    UserManagement.removeUser(userId);
                 }
                 out.close();
                 in.close();

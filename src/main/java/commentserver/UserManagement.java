@@ -5,7 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.w3c.dom.Document;
 
 /**
- * This class manages User objects.<br>
+ * This class manages User objects among threads<br>
  * Each of them contains the id of a movie he is watching and the movie's comment list. 
  *
  * @author Hiroki Sawano
@@ -17,15 +17,15 @@ import org.w3c.dom.Document;
 public class UserManagement {
     
     // the maximum number of users
-    private static int maxNumUser;
+    private static final int maxNumUser;
     // a user management area 
-    public static User user[];
+    private static User user[];
     private static Logger logger = LogManager.getLogger();
 
     /**
-     * This Constructor creates a user management area that can accommodate maxNumUser users.
+     * This block initializes a user management area that can accommodate maxNumUser users.
      */
-    public UserManagement() {
+    static {
         Config config = Config.getInstance();
         maxNumUser = config.getMaxNumUser();
         user = new User[maxNumUser];
@@ -71,7 +71,7 @@ public class UserManagement {
      *
      * @param id
      */
-    synchronized void removeUser(int id) {
+    synchronized public static void removeUser(int id) {
         user[id].setThread(null);
         user[id].setIsUsed(false);
         user[id].setMovieId(null);
@@ -85,7 +85,7 @@ public class UserManagement {
      * @param movieId
      * @param comment
      */
-    synchronized void sendComment(String movieId, String comment) {
+    synchronized public static void sendComment(String movieId, String comment) {
         for (int i = 0; i < maxNumUser; i++) {
             if (user[i].isUsed() && user[i].getMovieId().equals(movieId)) {
                 user[i].getThread().getOut().print(comment + '\0');
@@ -102,7 +102,7 @@ public class UserManagement {
      * @param movieId
      * @return numUsers
      */
-    synchronized static int activeUsers(String movieId) {
+    synchronized public static int activeUsers(String movieId) {
         int numUsers = 0;
         for (int i = 0; i < maxNumUser; i++) {
             if (user[i].isUsed() && user[i].getMovieId().equals(movieId)) {
