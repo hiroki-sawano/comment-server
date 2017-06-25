@@ -144,19 +144,19 @@ public class CommentList {
         if (getCommentList() == null) {
             // publisher accesses if this is live streaming
             // read the comment file
-            File fileObject = new File(commentListDir + "\\" + getFileName());
+            File fileObject = new File(commentListDir + "/" + getFileName());
 
             // if it doesn't exist, create a new file
             if (!fileObject.exists()) {
                 fileObject.createNewFile();
-                OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(commentListDir + "\\" + getFileName()));
+                OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(commentListDir + "/" + getFileName()));
                 writer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?><root><createdTime>"
                         + new Date().getTime() + "</createdTime></root>");
 
                 writer.close();
-                logger.info("Created the comment list : {}", commentListDir + "\\" + getFileName());
+                logger.info("Created the comment list : {}", commentListDir + "/" + getFileName());
             }else{
-                logger.info("Opened the comment list : {}", commentListDir + "\\" + getFileName());
+                logger.info("Opened the comment list : {}", commentListDir + "/" + getFileName());
             }
             DocumentBuilder docBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             setCommentList(docBuilder.parse(fileObject));
@@ -370,10 +370,10 @@ public class CommentList {
      * @throws TransformerException
      */
     public void writeCommentListToFile() throws TransformerConfigurationException, TransformerException {
-        File outfile = new File(commentListDir + "\\" + getFileName());
+        File outfile = new File(commentListDir + "/" + getFileName());
         TransformerFactory tfactory = TransformerFactory.newInstance();
         Transformer transformer = tfactory.newTransformer();
         transformer.transform(new DOMSource(getCommentList()), new StreamResult(outfile));
-        logger.info("Wrote comments in memory to the file : {}", commentListDir + "\\" + getFileName());
+        logger.info("Wrote comments in memory to the file : {}", commentListDir + "/" + getFileName());
     }
 }
